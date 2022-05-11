@@ -1,8 +1,10 @@
-(ns pftv.370)
+(ns pftv.370
+  (:require
+   [clojure.string :as str]))
 
 (defn ->hashtags [headline]
-  (->> (clojure.string/split headline #" |-")
+  (->> (str/split headline #" |-")
        (sort-by count >)
        (take 3)
        (map #(str "#" %))
-       (map clojure.string/lower-case)))
+       (map str/lower-case)))
