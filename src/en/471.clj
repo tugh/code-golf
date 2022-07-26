@@ -21,11 +21,9 @@
 
 (defn regroupv2
   [plate size]
-  (let [reversed-codes (-> plate
-                           (str/replace "-" "")
-                           reverse)]
-    (->> reversed-codes
-         (partition-all size)
-         reverse
-         (map #(apply str (reverse %)))
-         (str/join "-"))))
+  (->> (str/replace plate "-" "")
+       reverse
+       (partition-all size)
+       reverse
+       (map #(apply str (reverse %)))
+       (str/join "-")))
