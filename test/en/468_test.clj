@@ -1,7 +1,7 @@
-(ns pftv.468-test
+(ns en.468-test
   (:require
    [clojure.test :refer [are deftest testing]]
-   [pftv.468 :refer [swapmaxmin]]))
+   [en.468 :refer [swapmaxmin]]))
 
 (deftest swapmaxmin-tests
   (testing "Default tests"

@@ -1,7 +1,7 @@
-(ns pftv.466-test
+(ns en.466-test
   (:require
    [clojure.test :refer [are deftest testing]]
-   [pftv.466 :refer [sort-with]]))
+   [en.466 :refer [sort-with]]))
 
 (deftest sort-with-tests
   (testing "Default tests"
