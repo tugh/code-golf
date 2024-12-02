@@ -3,14 +3,18 @@
    [advent-of-code.2024.io :as io]
    [clojure.string :as str]))
 
-(defn solve-p1!
+(defn read-input!
   []
   (->> "01"
        io/read-input-as-lines!
        (map #(str/split % #"\s+"))
        (map (fn [[x y]]
               [(Integer/parseInt x)
-               (Integer/parseInt y)]))
+               (Integer/parseInt y)]))))
+
+(defn solve-p1!
+  []
+  (->> (read-input!)
        (apply mapv vector)
        (map sort)
        (apply mapv vector)
