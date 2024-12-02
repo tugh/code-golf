@@ -21,8 +21,23 @@
        (map (fn [[x y]] (abs (- x y))))
        (apply +)))
 
+(defn solve-p2!
+  []
+  (let [[items items'] (->> (read-input!)
+                            (apply mapv vector))
+        freqs (frequencies items')]
+    (->> items
+         (map (fn [x]
+                (if-let [occ (get freqs x)]
+                  (* x occ)
+                  0)))
+         (apply +))))
+
 (comment
   (solve-p1!)
   ;;=> 1222801
+
+  (solve-p2!)
+  ;;=> 22545250
 
   )
