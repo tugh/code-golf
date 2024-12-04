@@ -2,7 +2,7 @@
   (:require
    [advent-of-code.2024.io :as io]))
 
-(defn- read-input!
+(defn read-input!
   []
   (->> (io/read-input-as-lines! "04")
        (mapv vec)))
