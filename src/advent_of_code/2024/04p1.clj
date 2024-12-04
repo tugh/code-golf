@@ -131,9 +131,9 @@
         w2 (reverse w1)]
     (+
      (if (= w1 '(\X \M \A \S))
-       1 0)
+       1 0) ; todo: do we really need this?
      (if (= w2 '(\X \M \A \S))
-       1 0))))
+       1 0)))) ; todo: do we really need this?
 
 (defn- solve-p1
   [input]
