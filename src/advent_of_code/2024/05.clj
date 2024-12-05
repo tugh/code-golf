@@ -2,6 +2,7 @@
   (:require
    [advent-of-code.2024.io :as io]
    [clojure.math :as math]
+   [clojure.set :as set]
    [clojure.string :as str]))
 
 (defn- parse-rules
@@ -40,8 +41,8 @@
 
 (defn- update-valid?
   [rules x y]
-  (and (not (contains? (:after (get rules x)) y))
-       (not (contains? (:before (get rules y)) x))))
+  (and (not (contains? (get-in rules [x :after]) y))
+       (not (contains? (get-in rules [y :before]) x))))
 
 (defn- update-sequence-valid?
   [rules update-sequence]
@@ -65,8 +66,38 @@
        (map ->middle)
        (apply +)))
 
+(defn- before-every-other?
+  [rules x others]
+  (-> rules
+      (get-in [x :after])
+      (set/intersection  others)
+      empty?))
+
+(defn- reorder
+  [rules update-sequence]
+  (loop [update-sequence (into #{} update-sequence)
+         acc []]
+    (if (= 1 (count update-sequence))
+      (conj acc (first update-sequence))
+      (let [x (->> update-sequence
+                   (filter #(before-every-other? rules % (disj update-sequence %)))
+                   first)]
+        (recur (disj update-sequence x)
+               (conj acc x))))))
+
+(defn- solve-p2
+  [[rules updates]]
+  (->> updates
+       (filter #(not (update-sequence-valid? rules %)))
+       (map #(reorder rules %))
+       (map ->middle)
+       (apply +)))
+
 (comment
   (solve-p1 (read-input!))
   ;;=> 5087
-  
+
+  (solve-p2 (read-input!))
+  ;;=> 4971
+
   )
